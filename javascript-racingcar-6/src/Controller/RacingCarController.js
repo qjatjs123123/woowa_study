@@ -1,4 +1,5 @@
 import InputView from '../View/InputView.js';
+import OutputView from '../View/OutputView.js';
 import { CONSTANTS } from '../Util/Constants.js';
 import Validation from '../Util/Validation.js';
 import Car from '../Domain/Car.js';
@@ -11,6 +12,7 @@ class RacingCarController {
     let gameCount = await InputView.inputgameCount();
     gameCount = this.#handlegameCount(gameCount);
 
+    OutputView.printResultMessage();
     this.#handleCarMove(carList, gameCount);
   }
 
@@ -22,7 +24,11 @@ class RacingCarController {
   }
 
   #printRoundResult(carList) {
-    carList.forEach((car) => console.log(car.roundResult()));
+    carList.forEach((car) => {
+      const message = car.roundResult();
+      OutputView.printRoundResult(message);
+    });
+    OutputView.printRoundResult('');
   }
 
   #handleCarNameStr(carNameStr) {

@@ -6,6 +6,7 @@ const INPUT_MESSAGE = Object.freeze({
 });
 
 const OUPUT_MESSAGE = Object.freeze({
+  resultMessage: '\n실행 결과',
   roundResult: (carName, carMove) => `${carName} : ${CONSTANTS.carMoveChar.repeat(carMove)}`,
 });
 
