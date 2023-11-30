@@ -6,16 +6,20 @@ import Car from '../Domain/Car.js';
 class RacingCarController {
   async gameStart() {
     const carNameStr = await InputView.inputcarNameStr();
-    let carNameList = carNameStr.split(CONSTANTS.carNameSeparator);
+    const carNameList = this.#handleCarNameStr(carNameStr);
+    const gameCount = await InputView.inputgameCount();
+  }
+
+  #handleCarNameStr(carNameStr) {
+    const carNameList = carNameStr.split(CONSTANTS.carNameSeparator);
     this.#carNameStrValidation(carNameList);
-    carNameList = carNameList.map((carName) => new Car(carName));
+    return carNameList.map((carName) => new Car(carName));
   }
 
   #carNameStrValidation(carNameList) {
     Validation.isCarOne(carNameList);
     Validation.isDuplicate(carNameList);
   }
-
 }
 
 export default RacingCarController;
