@@ -3,4 +3,8 @@ const CONSTANTS = Object({
   carNameMaxLength: 5,
 });
 
-export default CONSTANTS;
+const REGEX = Object({
+  gameCount: /^\d+$/,
+});
+
+export { CONSTANTS, REGEX };
