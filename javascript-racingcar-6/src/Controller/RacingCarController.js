@@ -10,6 +10,7 @@ class RacingCarController {
   }
 
   #carNameStrValidation(carNameList) {
+    Validation.isCarOne(carNameList);
     Validation.isDuplicate(carNameList);
   }
 }
