@@ -7,7 +7,7 @@ class App {
   }
 
   async play() {
-    this.#racingCarController.gameStart();
+    await this.#racingCarController.gameStart();
   }
 }
 
