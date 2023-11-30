@@ -13,7 +13,7 @@ class RacingCarController {
     let gameCount = await InputView.inputgameCount();
     gameCount = this.#handlegameCount(gameCount);
 
-    OutputView.printResultMessage();
+    OutputView.printMessage(OUPUT_MESSAGE.resultMessage);
     this.#handleCarMove(carList, gameCount);
 
     const winnerList = this.#decideWinner(carList);
