@@ -6,7 +6,7 @@ class OutputView {
     Console.print(OUPUT_MESSAGE.resultMessage);
   }
 
-  static printRoundResult(message) {
+  static printMessage(message) {
     Console.print(message);
   }
 }

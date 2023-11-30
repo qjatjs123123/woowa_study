@@ -1,5 +1,6 @@
 const CONSTANTS = Object({
   carNameSeparator: ',',
+  winnerNameSeparator: ', ',
   carMoveChar: '-',
   carNameMaxLength: 5,
   randomMin: 0,

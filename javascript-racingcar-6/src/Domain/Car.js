@@ -26,6 +26,14 @@ class Car {
   roundResult() {
     return OUPUT_MESSAGE.roundResult(this.#carName, this.#carMove);
   }
+
+  get carMove() {
+    return this.#carMove;
+  }
+
+  get carName() {
+    return this.#carName;
+  }
 }
 
 export default Car;

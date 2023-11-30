@@ -3,6 +3,7 @@ import OutputView from '../View/OutputView.js';
 import { CONSTANTS } from '../Util/Constants.js';
 import Validation from '../Util/Validation.js';
 import Car from '../Domain/Car.js';
+import { OUPUT_MESSAGE } from '../Util/Message.js';
 
 class RacingCarController {
   async gameStart() {
@@ -14,6 +15,14 @@ class RacingCarController {
 
     OutputView.printResultMessage();
     this.#handleCarMove(carList, gameCount);
+
+    const winnerList = this.#decideWinner(carList);
+    OutputView.printMessage(OUPUT_MESSAGE.winnerResult(winnerList));
+  }
+
+  #decideWinner(carList) {
+    const moveMax = Math.max(...carList.map((car) => car.carMove));
+    return carList.filter((car) => car.carMove === moveMax).map((car) => car.carName);
   }
 
   #handleCarMove(carList, gameCount) {
@@ -26,9 +35,9 @@ class RacingCarController {
   #printRoundResult(carList) {
     carList.forEach((car) => {
       const message = car.roundResult();
-      OutputView.printRoundResult(message);
+      OutputView.printMessage(message);
     });
-    OutputView.printRoundResult('');
+    OutputView.printMessage('');
   }
 
   #handleCarNameStr(carNameStr) {
