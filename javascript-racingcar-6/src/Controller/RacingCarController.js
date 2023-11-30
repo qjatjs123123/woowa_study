@@ -6,19 +6,23 @@ import Car from '../Domain/Car.js';
 class RacingCarController {
   async gameStart() {
     const carNameStr = await InputView.inputcarNameStr();
-    const carNameList = this.#handleCarNameStr(carNameStr);
+    const carList = this.#handleCarNameStr(carNameStr);
 
     let gameCount = await InputView.inputgameCount();
     gameCount = this.#handlegameCount(gameCount);
 
-    this.#handleCarMove(carNameList, gameCount);
+    this.#handleCarMove(carList, gameCount);
   }
 
-  #handleCarMove(carNameList, gameCount) {
+  #handleCarMove(carList, gameCount) {
     for (let round = 0; round < gameCount; round += 1) {
-      carNameList.forEach((carName) => carName.decideMoveOrStop());
-      carNameList.forEach((carName) => console.log(carName.result()));
+      carList.forEach((carName) => carName.decideMoveOrStop());
+      this.#printRoundResult(carList);
     }
+  }
+
+  #printRoundResult(carList) {
+    carList.forEach((car) => console.log(car.roundResult()));
   }
 
   #handleCarNameStr(carNameStr) {

@@ -1,5 +1,5 @@
 import { Random } from '@woowacourse/mission-utils';
-import { ERROR_MESSAGE } from '../Util/Message.js';
+import { ERROR_MESSAGE, OUPUT_MESSAGE } from '../Util/Message.js';
 import { CONSTANTS } from '../Util/Constants.js';
 
 class Car {
@@ -23,8 +23,8 @@ class Car {
     if (random >= CONSTANTS.moveNumber) this.#carMove += 1;
   }
 
-  result() {
-    return `${this.#carName} ${this.#carMove}`;
+  roundResult() {
+    return OUPUT_MESSAGE.roundResult(this.#carName, this.#carMove);
   }
 }
 

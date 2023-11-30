@@ -5,6 +5,10 @@ const INPUT_MESSAGE = Object.freeze({
   gameCount: '시도할 횟수는 몇 회인가요?\n',
 });
 
+const OUPUT_MESSAGE = Object.freeze({
+  roundResult: (carName, carMove) => `${carName} : ${CONSTANTS.carMoveChar.repeat(carMove)}`,
+});
+
 const ERROR_MESSAGE = Object.freeze({
   carNameDuplicate: '[ERROR] 자동차 이름은 중복되면 안 됩니다.',
   carOne: '[ERROR] 자동차 이름은 최소 2개 이상 입력하셔야 합니다.',
@@ -13,4 +17,4 @@ const ERROR_MESSAGE = Object.freeze({
   gameCount: '[ERROR] 숫자가 잘못된 형식입니다.',
 });
 
-export { INPUT_MESSAGE, ERROR_MESSAGE };
+export { INPUT_MESSAGE, ERROR_MESSAGE, OUPUT_MESSAGE };
