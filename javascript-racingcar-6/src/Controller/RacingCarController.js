@@ -10,6 +10,15 @@ class RacingCarController {
 
     let gameCount = await InputView.inputgameCount();
     gameCount = this.#handlegameCount(gameCount);
+
+    this.#handleCarMove(carNameList, gameCount);
+  }
+
+  #handleCarMove(carNameList, gameCount) {
+    for (let round = 0; round < gameCount; round += 1) {
+      carNameList.forEach((carName) => carName.decideMoveOrStop());
+      carNameList.forEach((carName) => console.log(carName.result()));
+    }
   }
 
   #handleCarNameStr(carNameStr) {
