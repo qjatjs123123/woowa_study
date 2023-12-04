@@ -13,9 +13,13 @@ class Validation {
   }
 
   static winningNumber(input) {
-    const winningNumber = input.split(CONSTANTS.lottoSplitChar);
-    if (winningNumber.length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.lottoError);
-    if (winningNumber.length !== new Set(winningNumber).size)
+    const winningNumbers = input.split(CONSTANTS.lottoSplitChar).map((lotto) => Number(lotto));
+
+    if (
+      winningNumbers.length !== CONSTANTS.lottoCount ||
+      winningNumbers.length !== new Set(winningNumbers).size ||
+      !winningNumbers.every((lotto) => lotto >= CONSTANTS.lottoMin && lotto <= CONSTANTS.lottoMax)
+    )
       throw new Error(ERROR_MESSAGE.lottoError);
   }
 }
