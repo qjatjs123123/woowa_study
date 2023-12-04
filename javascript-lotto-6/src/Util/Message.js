@@ -12,6 +12,7 @@ const ERROR_MESSAGE = Object.freeze({
 const OUTPUT_MESSAGE = Object.freeze({
   purchaseAmount: (purchaseAmount) =>
     `\n${Number(purchaseAmount / CONSTANTS.lottoPrice)}개를 구매했습니다.`,
+  lotto: (lotto) => `[${lotto.join(', ')}]`,
 });
 
 export { INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE };

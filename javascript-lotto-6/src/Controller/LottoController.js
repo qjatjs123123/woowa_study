@@ -7,7 +7,9 @@ import { INPUT_MESSAGE, OUTPUT_MESSAGE } from '../Util/Message.js';
 
 class LottoController {
   #outputPurchaseAmount(userLotto, purchaseAmount) {
+    const userLottoList = userLotto.getUserLotto();
     OutputView.printOutputMessage(OUTPUT_MESSAGE.purchaseAmount(purchaseAmount));
+    userLottoList.forEach((lotto) => OutputView.printOutputMessage(OUTPUT_MESSAGE.lotto(lotto)));
   }
 
   #inputPurchaseAmount = async () => {
