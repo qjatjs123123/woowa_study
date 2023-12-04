@@ -1,12 +1,13 @@
 import OutputView from '../View/OutputView.js';
 
 class ErrorHandler {
-  static async handle(data, validateFunc, callbackFunc) {
+  static handle(data, validateFunc) {
     try {
       validateFunc(data);
+      return true;
     } catch (error) {
       OutputView.printOutputMessage(error.message);
-      await callbackFunc();
+      return false;
     }
   }
 }

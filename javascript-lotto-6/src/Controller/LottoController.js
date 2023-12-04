@@ -13,13 +13,17 @@ class LottoController {
   }
 
   #inputPurchaseAmount = async () => {
-    const purchaseAmount = await InputView.printInputMessage(INPUT_MESSAGE.purchaseAmount);
-    await ErrorHandler.handle(purchaseAmount, Validation.purchaseAmount, this.#inputPurchaseAmount);
-    return Number(purchaseAmount);
+    let amount = 0;
+    while (true) {
+      amount = await InputView.printInputMessage(INPUT_MESSAGE.purchaseAmount);
+      if (ErrorHandler.handle(amount, Validation.purchaseAmount)) break;
+    }
+    return Number(amount);
   };
 
   async start() {
     const purchaseAmount = await this.#inputPurchaseAmount();
+    console.log(purchaseAmount);
     const userLotto = new UserLotto(purchaseAmount);
     this.#outputPurchaseAmount(userLotto, purchaseAmount);
   }
