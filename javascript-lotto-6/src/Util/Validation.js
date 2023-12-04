@@ -15,6 +15,8 @@ class Validation {
   static winningNumber(input) {
     const winningNumber = input.split(CONSTANTS.lottoSplitChar);
     if (winningNumber.length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.lottoError);
+    if (winningNumber.length !== new Set(winningNumber).size)
+      throw new Error(ERROR_MESSAGE.lottoError);
   }
 }
 
