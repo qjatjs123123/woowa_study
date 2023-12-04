@@ -3,6 +3,7 @@ const CONSTANTS = Object.freeze({
   lottoMin: 1,
   lottoMax: 45,
   lottoCount: 6,
+  lottoSplitChar: ',',
 });
 
 export default CONSTANTS;

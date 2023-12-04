@@ -11,6 +11,11 @@ class Validation {
     )
       throw new Error(ERROR_MESSAGE.purchaseAmount);
   }
+
+  static winningNumber(input) {
+    const winningNumber = input.split(CONSTANTS.lottoSplitChar);
+    if (winningNumber.length !== CONSTANTS.lottoCount) throw new Error(ERROR_MESSAGE.lottoError);
+  }
 }
 
 export default Validation;

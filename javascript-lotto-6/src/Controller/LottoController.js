@@ -25,7 +25,7 @@ class LottoController {
     let winningNumber = 0;
     while (true) {
       winningNumber = await InputView.printInputMessage(INPUT_MESSAGE.winningNumber);
-      if (ErrorHandler.handle(winningNumber, Validation.purchaseAmount)) break;
+      if (ErrorHandler.handle(winningNumber, Validation.winningNumber)) break;
     }
     return Number(amount);
   }
