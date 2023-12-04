@@ -14,7 +14,10 @@ class UserLotto {
   #lottoPurchase() {
     for (let count = 0; count < Number(this.#purchaseAmount / 1000); count += 1)
       this.#userLotto.push(new Lotto(RandomNumberGenerator.generator()));
-    console.log(this.#userLotto);
+  }
+
+  getUserLotto() {
+    return this.#userLotto.map((lotto) => lotto.numbers);
   }
 }
 
