@@ -16,6 +16,11 @@ const OUTPUT_MESSAGE = Object.freeze({
   purchaseAmount: (purchaseAmount) =>
     `\n${Number(purchaseAmount / CONSTANTS.lottoPrice)}개를 구매했습니다.`,
   lotto: (lotto) => `[${lotto.join(', ')}]`,
+  lottoThree: (result) => `3개 일치 (5,000원) - ${result}개`,
+  lottoFour: (result) => `4개 일치 (50,000원) - ${result}개`,
+  lottoFive: (result) => `5개 일치 (1,500,000원) - ${result}개`,
+  lottoSix: (result) => `6개 일치 (2,000,000,000원) - ${result}개`,
+  lottoBonus: (result) => `5개 일치, 보너스 볼 일치 (30,000,000원) - ${result}개`,
 });
 
 export { INPUT_MESSAGE, ERROR_MESSAGE, OUTPUT_MESSAGE };
