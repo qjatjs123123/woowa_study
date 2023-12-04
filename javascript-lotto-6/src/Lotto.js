@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from './Util/Message.js';
+import CONSTANTS from './Util/Constants.js';
 
 class Lotto {
   #numbers;
@@ -9,9 +10,12 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (
+      numbers.length !== CONSTANTS.lottoCount ||
+      numbers.length !== new Set(numbers).size ||
+      !numbers.every((lotto) => lotto >= CONSTANTS.lottoMin && lotto <= CONSTANTS.lottoMax)
+    )
       throw new Error(ERROR_MESSAGE.lottoError);
-    }
   }
 
   get numbers() {
