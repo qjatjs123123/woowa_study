@@ -22,6 +22,19 @@ class Validation {
     )
       throw new Error(ERROR_MESSAGE.lottoError);
   }
+
+  static bonusNumber(input, winningLotto) {
+    if (input === '') throw new Error(ERROR_MESSAGE.bonusError);
+
+    const bonus = Number(input);
+    if (
+      Number.isNaN(bonus) ||
+      bonus < CONSTANTS.lottoMin ||
+      bonus > CONSTANTS.lottoMax ||
+      winningLotto.includes(bonus)
+    )
+      throw new Error(ERROR_MESSAGE.bonusError);
+  }
 }
 
 export default Validation;

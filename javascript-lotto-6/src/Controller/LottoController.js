@@ -4,6 +4,7 @@ import ErrorHandler from '../Util/ErrorHandler.js';
 import Validation from '../Util/Validation.js';
 import UserLotto from '../Domain/UserLotto.js';
 import { INPUT_MESSAGE, OUTPUT_MESSAGE } from '../Util/Message.js';
+import CONSTANTS from '../Util/Constants.js';
 
 class LottoController {
   #outputPurchaseAmount(userLotto, purchaseAmount) {
@@ -27,7 +28,16 @@ class LottoController {
       winningNumber = await InputView.printInputMessage(INPUT_MESSAGE.winningNumber);
       if (ErrorHandler.handle(winningNumber, Validation.winningNumber)) break;
     }
-    return Number(amount);
+    return winningNumber.split(CONSTANTS.lottoSplitChar).map((lotto) => Number(lotto));
+  }
+
+  async #inputBonusNumber(winningNumber) {
+    let bonusNumber = 0;
+    while (true) {
+      bonusNumber = await InputView.printInputMessage(INPUT_MESSAGE.bonusNumber);
+      if (ErrorHandler.handle(bonusNumber, Validation.bonusNumber, winningNumber)) break;
+    }
+    return Number(bonusNumber);
   }
 
   async start() {
@@ -35,6 +45,7 @@ class LottoController {
     const userLotto = new UserLotto(purchaseAmount);
     this.#outputPurchaseAmount(userLotto, purchaseAmount);
     const winningNumber = await this.#inputWinningNumber();
+    const bonusNumber = await this.#inputBonusNumber(winningNumber);
   }
 }
 
