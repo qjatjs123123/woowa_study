@@ -9,6 +9,14 @@ const mapper = {
   7: 'bonus',
 };
 
+const price = {
+  3: 5000,
+  4: 50000,
+  5: 1500000,
+  7: 30000000,
+  6: 2000000000,
+};
+
 class LottoMachine {
   #winningNumber;
   #bonusNumber;
@@ -19,15 +27,16 @@ class LottoMachine {
   }
 
   compareLotto(userLotto) {
-    const result = { three: 0, four: 0, five: 0, six: 0, bonus: 0 };
+    const result = { three: 0, four: 0, five: 0, six: 0, bonus: 0, profit: 0 };
 
-    userLotto.forEach((lotto) => {
+    userLotto.getUserLotto().forEach((lotto) => {
       let matchCount = totalCount - new Set([...this.#winningNumber, ...lotto]).size;
       if (matchCount < 3) return;
       if (matchCount === 5 && lotto.includes(this.#bonusNumber)) matchCount = 7;
       result[mapper[matchCount]] += 1;
+      result.profit += price[matchCount];
     });
-
+    result.profit = ((result.profit / userLotto.purchaseAmount) * 100).toFixed(1);
     return result;
   }
 }

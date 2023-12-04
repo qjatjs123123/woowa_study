@@ -19,6 +19,10 @@ class UserLotto {
   getUserLotto() {
     return this.#userLotto.map((lotto) => lotto.numbers);
   }
+
+  get purchaseAmount() {
+    return this.#purchaseAmount;
+  }
 }
 
 export default UserLotto;

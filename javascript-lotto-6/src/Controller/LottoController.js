@@ -20,6 +20,7 @@ class LottoController {
     OutputView.printOutputMessage(OUTPUT_MESSAGE.lottoFive(lottoResult.five));
     OutputView.printOutputMessage(OUTPUT_MESSAGE.lottoBonus(lottoResult.bonus));
     OutputView.printOutputMessage(OUTPUT_MESSAGE.lottoSix(lottoResult.six));
+    OutputView.printOutputMessage(OUTPUT_MESSAGE.lottoProfit(lottoResult.profit));
   }
 
   async #inputPurchaseAmount() {
@@ -56,7 +57,7 @@ class LottoController {
     const winningNumber = await this.#inputWinningNumber();
     const bonusNumber = await this.#inputBonusNumber(winningNumber);
     const lottoMachine = new LottoMachine(winningNumber, bonusNumber);
-    const lottoResult = lottoMachine.compareLotto(userLotto.getUserLotto());
+    const lottoResult = lottoMachine.compareLotto(userLotto);
     this.#outputLottoResult(lottoResult);
   }
 }
