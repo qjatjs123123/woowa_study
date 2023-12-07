@@ -11,6 +11,7 @@ class EventController {
     const calendar = await this.handleInputDate();
     const userDTO = await this.handleInputMenu();
     OutputView.print(OUTPUT_MESSAGE.event(calendar.date));
+    this.handlePrintOrder(userDTO);
   }
 
   async handleInputDate() {
@@ -29,6 +30,11 @@ class EventController {
 
       if (isValidate) return new UserDTO(menu);
     }
+  }
+
+  handlePrintOrder(userDTO) {
+    OutputView.print(OUTPUT_MESSAGE.order);
+    OutputView.print(userDTO.getOrderMenu());
   }
 }
 

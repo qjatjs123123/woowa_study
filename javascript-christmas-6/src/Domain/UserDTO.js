@@ -60,6 +60,15 @@ class UserDTO {
 
     if (result > CONSTANT.menuLimitCnt) throw new Error(ERROR_MESSAGE.countLimit);
   }
+
+  getOrderMenu() {
+    let orderMenu = '';
+
+    this.#userMenu.forEach(
+      ([menuName, menuCount]) => (orderMenu += `${menuName} ${menuCount}개\n`),
+    );
+    return orderMenu;
+  }
 }
 
 export default UserDTO;
