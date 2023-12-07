@@ -7,21 +7,17 @@ import ErrorHandler from '../Util/ErrorHandler.js';
 class EventController {
   async start() {
     OutputView.print(OUTPUT_MESSAGE.start);
-    await this.handleInputDate();
+    const calendar = await this.handleInputDate();
+    console.log(calendar);
   }
 
   async handleInputDate() {
-    let calendar = '';
     while (true) {
       const input = await InputView.read(INPUT_MESSAGE.date);
       const isValidate = ErrorHandler.handle(() => new Calendar(input));
 
-      if (isValidate) {
-        calendar = new Calendar(input);
-        break;
-      }
+      if (isValidate) return new Calendar(input);
     }
-    return calendar;
   }
 }
 
