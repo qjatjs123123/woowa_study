@@ -1,6 +1,7 @@
 import { MENU, CATEGORY } from '../Util/Menu.js';
 import { ERROR_MESSAGE } from '../Util/Message.js';
 import REGEX from '../Util/Regex.js';
+import { CONSTANT } from '../Util/Constants.js';
 
 class UserDTO {
   #userMenu;
@@ -22,6 +23,7 @@ class UserDTO {
     this.#isMenuInclude();
     this.#isMenuDuplicate();
     this.#isOnlyDrink();
+    this.#isCountLimit();
   }
 
   #isMenuValidate() {
@@ -48,6 +50,14 @@ class UserDTO {
   #isOnlyDrink() {
     const result = this.#userMenu.some(([menuName]) => menuName in MENU.drink === false);
     if (!result) throw new Error(ERROR_MESSAGE.drink);
+  }
+
+  #isCountLimit() {
+    const result = this.#userMenu.reduce((total, [_, menuCount]) => {
+      return total + menuCount;
+    }, 0);
+
+    if (result > CONSTANT.menuLimitCnt) throw new Error(ERROR_MESSAGE.countLimit);
   }
 }
 

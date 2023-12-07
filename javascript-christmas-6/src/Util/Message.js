@@ -11,6 +11,7 @@ const ERROR_MESSAGE = Object.freeze({
   date: '[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.',
   menu: '[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.',
   drink: '[ERROR] 음료만 주문하셨습니다. 다시 입력해 주세요.',
+  countLimit: '[ERROR] 20개 이상 넘게 입력하셨습니다. 다시 입력해 주세요.',
 });
 
 export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE };
