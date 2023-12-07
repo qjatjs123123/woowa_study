@@ -11,6 +11,11 @@ class Calendar {
   #validate(date) {
     const regex = REGEX.date;
     if (!regex.test(date)) throw new Error(ERROR_MESSAGE.date);
+    return date;
+  }
+
+  get date() {
+    return this.#date;
   }
 }
 

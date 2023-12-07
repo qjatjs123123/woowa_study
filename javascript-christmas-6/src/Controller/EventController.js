@@ -9,7 +9,8 @@ class EventController {
   async start() {
     OutputView.print(OUTPUT_MESSAGE.start);
     const calendar = await this.handleInputDate();
-    await this.handleInputMenu();
+    const userDTO = await this.handleInputMenu();
+    OutputView.print(OUTPUT_MESSAGE.event(calendar.date));
   }
 
   async handleInputDate() {

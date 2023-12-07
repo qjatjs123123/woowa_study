@@ -53,6 +53,7 @@ class UserDTO {
   }
 
   #isCountLimit() {
+    // eslint-disable-next-line no-unused-vars
     const result = this.#userMenu.reduce((total, [_, menuCount]) => {
       return total + menuCount;
     }, 0);
