@@ -80,7 +80,8 @@ class EventController {
 
   handlePrintProfit(profit) {
     OutputView.print(OUTPUT_MESSAGE.profit);
-    OutputView.print(`-${OUTPUT_MESSAGE.comma(profit)}`);
+    if (profit === 0) OutputView.print(OUTPUT_MESSAGE.nothing);
+    else OutputView.print(`-${OUTPUT_MESSAGE.comma(profit)}`);
   }
 
   handleEventDiscount(calendar, userDTO) {
@@ -103,8 +104,10 @@ class EventController {
 
   handlePrintEventList(eventList) {
     OutputView.print(OUTPUT_MESSAGE.eventList);
-    eventList.forEach((event) => OutputView.print(event));
-    OutputView.print('');
+    if (eventList.length !== 0) {
+      eventList.forEach((event) => OutputView.print(event));
+      OutputView.print('');
+    } else OutputView.print(OUTPUT_MESSAGE.nothing);
   }
 }
 

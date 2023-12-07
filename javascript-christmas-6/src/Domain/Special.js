@@ -3,7 +3,7 @@ import { EVENT_MESSAGE } from '../Util/Message.js';
 
 class Special {
   static discount(calendar) {
-    if (calendar.isWeekday()) {
+    if (calendar.isSpecial()) {
       return [SALE.special, EVENT_MESSAGE.special(SALE.special)];
     }
     return 0;

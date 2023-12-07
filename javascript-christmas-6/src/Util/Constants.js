@@ -8,6 +8,7 @@ const CONSTANT = Object.freeze({
   star: [5000, '별'],
   tree: [10000, '트리'],
   santa: [20000, '산타'],
+  nothing: '없음',
 });
 
 const SALE = Object.freeze({

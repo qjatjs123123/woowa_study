@@ -4,7 +4,7 @@ const OUTPUT_MESSAGE = Object.freeze({
   order: '<주문 메뉴>',
   totalAmount: '<할인 전 총주문 금액>',
   free: '<증정 메뉴>',
-  nothing: '없음',
+  nothing: '없음\n',
   comma: (amount) => `${amount.toLocaleString()}원\n`,
   eventList: '<혜택 내역>',
   profit: '<총혜택 금액>',
