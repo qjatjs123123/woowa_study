@@ -1,11 +1,16 @@
 import OutputView from '../View/OutputView.js';
 import Calendar from '../Domain/Calendar.js';
-import { OUTPUT_MESSAGE, INPUT_MESSAGE } from '../Util/Message.js';
+import { OUTPUT_MESSAGE, INPUT_MESSAGE, EVENT_MESSAGE } from '../Util/Message.js';
+import { EVENT } from '../Util/Constants.js';
 import InputView from '../View/InputView.js';
 import ErrorHandler from '../Util/ErrorHandler.js';
 import UserDTO from '../Domain/UserDTO.js';
 import ChristmasDday from '../Domain/ChristmasDday.js';
 import Weekday from '../Domain/Weekday.js';
+import Special from '../Domain/Special.js';
+import Free from '../Domain/Free.js';
+import Weekend from '../Domain/Weekend.js';
+import EventBadge from '../Domain/EventBadge.js';
 
 class EventController {
   async start() {
@@ -13,9 +18,16 @@ class EventController {
     const calendar = await this.handleInputDate();
     const userDTO = await this.handleInputMenu();
     OutputView.print(OUTPUT_MESSAGE.event(calendar.date));
-    this.handlePrintOrder(userDTO);
 
-    this.handleEventDiscount(calendar, userDTO);
+    this.handlePrintOrder(userDTO);
+    this.handlePrintTotalAmount(userDTO);
+    this.handlePrintFree(userDTO);
+
+    const [eventList, profit] = this.handleEventDiscount(calendar, userDTO);
+    this.handlePrintEventList(eventList);
+    this.handlePrintProfit(profit);
+    this.handleExpectAmount(userDTO, profit);
+    this.handlePrintBadge(profit);
   }
 
   async handleInputDate() {
@@ -36,9 +48,39 @@ class EventController {
     }
   }
 
+  handlePrintFree(userDTO) {
+    const result = Free.event(userDTO);
+    OutputView.print(OUTPUT_MESSAGE.free);
+    if (result === 0) OutputView.print(OUTPUT_MESSAGE.nothing);
+    else OutputView.print(EVENT_MESSAGE.freeItem(EVENT.freeItem[0], EVENT.freeItem[2]));
+  }
+
+  handleExpectAmount(userDTO, profit) {
+    const result = Free.event(userDTO);
+    let expectAmount = userDTO.getTotalAmount() - profit;
+    if (result !== 0) expectAmount += EVENT.freeItem[1];
+    OutputView.print(OUTPUT_MESSAGE.expectAmount);
+    OutputView.print(OUTPUT_MESSAGE.comma(expectAmount));
+  }
+
   handlePrintOrder(userDTO) {
     OutputView.print(OUTPUT_MESSAGE.order);
     OutputView.print(userDTO.getOrderMenu());
+  }
+
+  handlePrintBadge(profit) {
+    OutputView.print(OUTPUT_MESSAGE.eventbadge);
+    OutputView.print(EventBadge.event(profit));
+  }
+
+  handlePrintTotalAmount(userDTO) {
+    OutputView.print(OUTPUT_MESSAGE.totalAmount);
+    OutputView.print(OUTPUT_MESSAGE.comma(userDTO.getTotalAmount()));
+  }
+
+  handlePrintProfit(profit) {
+    OutputView.print(OUTPUT_MESSAGE.profit);
+    OutputView.print(`-${OUTPUT_MESSAGE.comma(profit)}`);
   }
 
   handleEventDiscount(calendar, userDTO) {
@@ -46,16 +88,23 @@ class EventController {
     let discountTotal = 0;
 
     const applyDiscount = (result) => {
-      if (result[0] !== 0) {
+      if (result !== 0) {
         discountTotal += result[0];
         discountList.push(result[1]);
       }
     };
-
     applyDiscount(ChristmasDday.discount(calendar));
     applyDiscount(Weekday.discount(calendar, userDTO));
+    applyDiscount(Weekend.discount(calendar, userDTO));
+    applyDiscount(Special.discount(calendar));
+    applyDiscount(Free.event(userDTO));
+    return [discountList, discountTotal];
+  }
 
-    console.log(discountList, discountTotal);
+  handlePrintEventList(eventList) {
+    OutputView.print(OUTPUT_MESSAGE.eventList);
+    eventList.forEach((event) => OutputView.print(event));
+    OutputView.print('');
   }
 }
 

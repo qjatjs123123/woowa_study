@@ -6,7 +6,7 @@ class App {
   }
 
   async run() {
-    this.EventController.start();
+    await this.EventController.start();
   }
 }
 

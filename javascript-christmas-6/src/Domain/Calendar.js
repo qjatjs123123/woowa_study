@@ -29,6 +29,10 @@ class Calendar {
     return EVENT.weekend.includes(day.getDay());
   }
 
+  isSpecial() {
+    return EVENT.special.includes(this.#date);
+  }
+
   get date() {
     return this.#date;
   }
