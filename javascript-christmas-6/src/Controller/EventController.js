@@ -4,6 +4,7 @@ import { OUTPUT_MESSAGE, INPUT_MESSAGE } from '../Util/Message.js';
 import InputView from '../View/InputView.js';
 import ErrorHandler from '../Util/ErrorHandler.js';
 import UserDTO from '../Domain/UserDTO.js';
+import ChristmasDday from '../Domain/ChristmasDday.js';
 
 class EventController {
   async start() {
@@ -12,6 +13,8 @@ class EventController {
     const userDTO = await this.handleInputMenu();
     OutputView.print(OUTPUT_MESSAGE.event(calendar.date));
     this.handlePrintOrder(userDTO);
+
+    this.handleEventDiscount(calendar, userDTO);
   }
 
   async handleInputDate() {
@@ -35,6 +38,16 @@ class EventController {
   handlePrintOrder(userDTO) {
     OutputView.print(OUTPUT_MESSAGE.order);
     OutputView.print(userDTO.getOrderMenu());
+  }
+
+  handleEventDiscount(calendar, userDTO) {
+    const discountList = [];
+    let discountTotal = 0;
+    let result = ChristmasDday.discount(calendar);
+    if (result[0] !== 0) {
+      discountTotal += result[0];
+      discountList.push(result[1]);
+    }
   }
 }
 

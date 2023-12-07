@@ -16,4 +16,8 @@ const ERROR_MESSAGE = Object.freeze({
   countLimit: '[ERROR] 20개 이상 넘게 입력하셨습니다. 다시 입력해 주세요.',
 });
 
-export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE };
+const EVENT_MESSAGE = Object.freeze({
+  dday: (discount) => `크리스마스 디데이 할인: -${discount.toLocaleString()}원`,
+});
+
+export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE, EVENT_MESSAGE };
