@@ -18,6 +18,7 @@ const ERROR_MESSAGE = Object.freeze({
 
 const EVENT_MESSAGE = Object.freeze({
   dday: (discount) => `크리스마스 디데이 할인: -${discount.toLocaleString()}원`,
+  weekday: (discount) => `평일 할인: -${discount.toLocaleString()}원`,
 });
 
 export { OUTPUT_MESSAGE, INPUT_MESSAGE, ERROR_MESSAGE, EVENT_MESSAGE };

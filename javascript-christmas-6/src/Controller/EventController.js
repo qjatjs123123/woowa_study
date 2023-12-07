@@ -5,6 +5,7 @@ import InputView from '../View/InputView.js';
 import ErrorHandler from '../Util/ErrorHandler.js';
 import UserDTO from '../Domain/UserDTO.js';
 import ChristmasDday from '../Domain/ChristmasDday.js';
+import Weekday from '../Domain/Weekday.js';
 
 class EventController {
   async start() {
@@ -43,11 +44,18 @@ class EventController {
   handleEventDiscount(calendar, userDTO) {
     const discountList = [];
     let discountTotal = 0;
-    let result = ChristmasDday.discount(calendar);
-    if (result[0] !== 0) {
-      discountTotal += result[0];
-      discountList.push(result[1]);
-    }
+
+    const applyDiscount = (result) => {
+      if (result[0] !== 0) {
+        discountTotal += result[0];
+        discountList.push(result[1]);
+      }
+    };
+
+    applyDiscount(ChristmasDday.discount(calendar));
+    applyDiscount(Weekday.discount(calendar, userDTO));
+
+    console.log(discountList, discountTotal);
   }
 }
 

@@ -1,6 +1,6 @@
 import REGEX from '../Util/Regex.js';
 import { ERROR_MESSAGE } from '../Util/Message.js';
-import { EVENT } from '../Util/Constants.js';
+import { EVENT, CONSTANT } from '../Util/Constants.js';
 
 class Calendar {
   #date;
@@ -17,6 +17,16 @@ class Calendar {
 
   isDday() {
     return EVENT.Dday >= this.#date;
+  }
+
+  isWeekday() {
+    const day = new Date(`${CONSTANT.year}-${CONSTANT.month}-${this.#date}`);
+    return EVENT.weekday.includes(day.getDay());
+  }
+
+  isWeekend() {
+    const day = new Date(`${CONSTANT.year}-${CONSTANT.month}-${this.#date}`);
+    return EVENT.weekend.includes(day.getDay());
   }
 
   get date() {

@@ -69,6 +69,38 @@ class UserDTO {
     );
     return orderMenu;
   }
+
+  getTotalAmount() {
+    return this.#userMenu.reduce((totalAmount, [menuName, menuCount]) => {
+      CATEGORY.forEach((category) => {
+        if (menuName in MENU[category]) {
+          // eslint-disable-next-line no-param-reassign
+          totalAmount += MENU[category][menuName] * menuCount;
+        }
+      });
+      return totalAmount;
+    }, 0);
+  }
+
+  getDessertCount() {
+    return this.#userMenu.reduce((totalCount, [menuName, menuCount]) => {
+      if (menuName in MENU.dessert) {
+        // eslint-disable-next-line no-param-reassign
+        totalCount += menuCount;
+      }
+      return totalCount;
+    }, 0);
+  }
+
+  getMainCount() {
+    return this.#userMenu.reduce((totalCount, [menuName, menuCount]) => {
+      if (menuName in MENU.main) {
+        // eslint-disable-next-line no-param-reassign
+        totalCount += menuCount;
+      }
+      return totalCount;
+    }, 0);
+  }
 }
 
 export default UserDTO;

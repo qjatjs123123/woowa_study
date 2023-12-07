@@ -1,5 +1,7 @@
 const CONSTANT = Object.freeze({
   menuLimitCnt: 20,
+  year: 2023,
+  month: 12,
 });
 
 const SALE = Object.freeze({
