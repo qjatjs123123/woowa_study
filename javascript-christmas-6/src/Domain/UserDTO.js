@@ -20,6 +20,7 @@ class UserDTO {
   #validate() {
     this.#isMenuValidate();
     this.#isMenuInclude();
+    this.#isMenuDuplicate();
   }
 
   #isMenuValidate() {
@@ -35,6 +36,12 @@ class UserDTO {
     );
 
     if (result) throw new Error(ERROR_MESSAGE.menu);
+  }
+
+  #isMenuDuplicate() {
+    const menuList = this.#userMenu.map(([menuName]) => menuName);
+
+    if (menuList.length !== new Set(menuList).size) throw new Error(ERROR_MESSAGE.menu);
   }
 }
 
