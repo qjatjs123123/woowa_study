@@ -8,7 +8,7 @@ class EventController {
   async start() {
     OutputView.print(OUTPUT_MESSAGE.start);
     const calendar = await this.handleInputDate();
-    console.log(calendar);
+    await this.handleInputMenu();
   }
 
   async handleInputDate() {
@@ -18,6 +18,10 @@ class EventController {
 
       if (isValidate) return new Calendar(input);
     }
+  }
+
+  async handleInputMenu() {
+    const menu = await InputView.read(INPUT_MESSAGE.menu);
   }
 }
 
