@@ -21,6 +21,7 @@ class UserDTO {
     this.#isMenuValidate();
     this.#isMenuInclude();
     this.#isMenuDuplicate();
+    this.#isOnlyDrink();
   }
 
   #isMenuValidate() {
@@ -42,6 +43,11 @@ class UserDTO {
     const menuList = this.#userMenu.map(([menuName]) => menuName);
 
     if (menuList.length !== new Set(menuList).size) throw new Error(ERROR_MESSAGE.menu);
+  }
+
+  #isOnlyDrink() {
+    const result = this.#userMenu.some(([menuName]) => menuName in MENU.drink === false);
+    if (!result) throw new Error(ERROR_MESSAGE.drink);
   }
 }
 
