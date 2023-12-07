@@ -1,5 +1,6 @@
 import { MENU, CATEGORY } from '../Util/Menu.js';
 import { ERROR_MESSAGE } from '../Util/Message.js';
+import REGEX from '../Util/Regex.js';
 
 class UserDTO {
   #userMenu;
@@ -17,7 +18,15 @@ class UserDTO {
   }
 
   #validate() {
+    this.#isMenuValidate();
     this.#isMenuInclude();
+  }
+
+  #isMenuValidate() {
+    const regex = REGEX.menu;
+    const result = this.#userMenu.some((menu) => regex.test(menu.join('-')) === false);
+
+    if (result) throw new Error(ERROR_MESSAGE.menu);
   }
 
   #isMenuInclude() {
